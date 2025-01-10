@@ -40,13 +40,22 @@ body{
 }
 
 .paper{
-
     position: relative;
+    width: 90px;
+    height: 119px;
     bottom: 20px;
     transition-duration: 0.3s;
 }
+
+.papetHidden{
+    visibility: hidden;
+    transition: transform 0.5s ease;
+
+}
+
 .paper:hover{
     bottom: 30px;
+
 }
 
 .imgpock:hover + .paper{
@@ -61,6 +70,43 @@ body{
 of
 
 reciep */
+@keyframes hidden{
+    0% {
+        opacity: 1;
+    }
+
+    200% {
+        opacity: 0;
+    }
+}
+
+@keyframes visible{
+    0% {
+        opacity: 0;
+    }
+
+    200% {
+        opacity: 1;
+    }
+}
+
+.out-of-pocket{
+    animation-name: outOfPocket;
+    animation-duration: 1s;
+
+    animation-timing-function: linear;
+}
+.appearReciep{
+    animation: visible 1s;
+
+}
+
+.disappearReciep{
+    animation: hidden 1s;
+
+}
+
+
 
 .flip-container {
 
@@ -72,12 +118,10 @@ reciep */
     width: 810px;
     height: 540px;
 
-    margin-left: 50%;
-    left: -405px;
-    margin-bottom: 50%;
-    top: 270px;
-
-
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 
 }
 
@@ -89,6 +133,7 @@ reciep */
     position: relative;
     transform-style: preserve-3d;
     transition: transform 0.9s;
+
 }
 
 .flip-card-front, .flip-card-back {
@@ -98,9 +143,12 @@ reciep */
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
+
+
 }
 
 .flip-card-front img, .flip-card-back img {
+
     border-radius: 10px;
 
     width: 100%;
