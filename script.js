@@ -40,10 +40,12 @@
 
 
 const pocketsModule = document.querySelector('.pockets')
+
 const getPocketByClassName = document.getElementById('getById')
+
+
 const recipes = [['1.jpg','1back.jpg'],['2.png','2back.png']]
 
-let paperInPocket;
 
 main.addEventListener('click', function(event){
     const pocket = event.target;
@@ -56,32 +58,64 @@ main.addEventListener('click', function(event){
 })
 
 
-function appearDisappearPaperInPocket(){}
 
-function appearDisappearReciepes(reciepCard, recepieInPocket) {
+
+let paperInPocket = null;
+function appearDisappearPaperInPocket(cardInPocket){
+
+    const classListCard = cardInPocket.classList;
+
+    if (paperInPocket != null){
+
+        if (classListCard.contains('paperApear')){
+            classListCard.remove('paperApear')
+        }
+
+    
+        getPocketByClassName.querySelector('#' + paperInPocket).lastElementChild.classList.replace('paperDisapear', 'paperApear')
+        classListCard.add('paperDisapear');
+
+        paperInPocket = cardInPocket.parentElement.id
+
+    }
+
+
+    else{
+        paperInPocket = cardInPocket.parentElement.id;
+        classListCard.add('paperDisapear');
+
+    };
+
+}
+
+function appearDisappearReciepes(reciepCard) {
     let pocketsElementById = Array.from(getPocketByClassName.children);
-    let indexOfPocket = recepieInPocket;
 
+    const lastPocket = pocketsElementById.at(-1);
 
-    if (pocketsElementById.at(-1).classList.contains('appearReciep')){
-        indexOfPocket.classList.replace('disappearReciep', 'appearReciep');
-        pocketsElementById.at(-1).classList.replace('appearReciep', 'disappearReciep');
+    if (lastPocket.classList.contains('appearReciep')){
+
+        lastPocket.classList.replace('appearReciep', 'disappearReciep');
         reciepCard.classList.add('appearReciep');
         pocketsModule.append(reciepCard)
 
         setTimeout(() => {
-            pocketsElementById.at(-1).remove();
+            lastPocket.remove();
         }, 1000);
 
-        }
+    }
 
-        else{
-            reciepCard.classList.add('appearReciep');
-            pocketsModule.append(reciepCard)
-            indexOfPocket.classList.add('disappearReciep');
-        }
 
-}
+
+    else{
+
+
+        reciepCard.classList.add('appearReciep');
+        pocketsModule.append(reciepCard)
+    }
+
+
+};
 
 
 
@@ -89,9 +123,12 @@ function addBlockOfReciep(pocket){
 
 
     let parentElem = pocket.parentElement;
-    let parentID = Number(parentElem.id);
+    let parentID = Number(parentElem.id.at(-1));
     let flipContainer = document.createElement('div')
-    let paper = pocket.nextElementSibling
+
+    let miniCardInPocket = pocket.nextElementSibling
+
+
 
 
     flipContainer.className = 'pocket flip-container'
@@ -99,12 +136,12 @@ function addBlockOfReciep(pocket){
     let imageFront = recipes[parentID][0];
     let imageBack = recipes[parentID][1];
 
-    flipContainer.innerHTML = '<div class="flip-card" id="animation">' +
-    '<div class="flip-card-front">' +
-    '</div>'+
-    '<div class="flip-card-back">'+
-    '</div>'+
-    '</div>'
+
+    flipContainer.innerHTML = `
+    <div class="flip-card" id="animation">
+    <div class="flip-card-front"></div>
+    <div class="flip-card-back"></div>
+    </div>`;
 
     let flipCardFront = flipContainer.querySelector('.flip-card-front')
     let flipCardBack = flipContainer.querySelector('.flip-card-back')
@@ -112,9 +149,10 @@ function addBlockOfReciep(pocket){
     flipCardFront.innerHTML = `<img src='img/recepies/${imageBack}' alt="Front Image" />`
     flipCardBack.innerHTML = `<img src='img/recepies/${imageFront}' alt="Front Image" />`
 
-    appearDisappearReciepes(flipContainer, paper);
 
+    appearDisappearReciepes(flipContainer);
 
+    appearDisappearPaperInPocket(miniCardInPocket);
 
 
 
