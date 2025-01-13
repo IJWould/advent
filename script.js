@@ -1,79 +1,87 @@
 
-
-
-
-
-
-// for (let pocket of pockets){
-    //     pocket.addEventListener('click', function(event){
-        //         let pocketBlock = pocket;
-        //         let parentID = Number(pocketBlock.parentElement.id);
-        //         let parentElem = pocketBlock.parentElement;
-        //         let imageFront = recipes[parentID[0]];
-        //         let imageBack = recipes[parentID[1]]
-        //         let flipContainer = document.createElement('div')
-
-
-
-        //         console.log(parentElem)
-
-        //         flipContainer.className = "flip-container"
-
-        //         flipContainer.innerHTML = '<div class="flip-card">' +
-        //         '<div class="flip-card-front">' +
-        //         '</div>'+
-        //         '<div class="flip-card-back">'+
-        //         '</div>'+
-        //         '</div>'
-
-
-        //         console.log(recipes[parentID])
-
-        //         flipContainer.childNodes[0].firstChild.innerHTML = `<img src='img/recepies/${imageFront}' alt="Front Image" />`
-        //         flipContainer.childNodes[0].lastChild.innerHTML = `<img src='img/recepies/${imageBack}' alt="Front Image" />`
-        //         console.log(flipContainer.childNodes[0].firstChild)
-
-        //         parentElem.append(flipContainer)
-
-        //     })
-        // }
-
-
 const pocketsModule = document.querySelector('.pockets')
 
 const getPocketByClassName = document.getElementById('getById')
 
-
 const recipes = [['1.jpg','1back.jpg'],['2.png','2back.png']]
+
+const targetElement = document.querySelector('.pocket flip-container');
 
 
 main.addEventListener('click', function(event){
+
     const pocket = event.target;
 
+
+    console.log(pocket)
     if(!pocket.closest('.imgpock')) {
         return
     };
-
     addBlockOfReciep(pocket)
+
+    // if(pocket.classList.contains('imgpock')) {
+
+    //     addBlockOfReciep(pocket)
+    // }
+
+    // else if(pocket.classList.contains('paper')) {
+
+    //     appearDisappearPaperInPocket(pocket)
+    // }
+    // else{
+    //     return
+    // }
 })
 
 
+// function appearDisappearPaperInPocket(cardInPocket){
 
+//     const classListCard = cardInPocket.classList;
+
+
+//     if (paperInPocket != null){
+
+//         if (classListCard.contains('paperApear') || classListCard.contains('paperDisapear')){
+    //             classListCard.remove('paperApear')
+    //             classListCard.remove('paperDisapear')
+    //         }
+
+
+
+    //         getPocketByClassName.querySelector('#' + paperInPocket).lastElementChild.classList.replace('paperDisapear', 'paperApear')
+    //         classListCard.add('paperDisapear');
+
+
+    //         paperInPocket = cardInPocket.parentElement.id
+
+    //     }
+
+
+    //     else{
+        //         paperInPocket = cardInPocket.parentElement.id;
+//         classListCard.add('paperDisapear');
+
+//     };
+
+// }
 
 let paperInPocket = null;
-function appearDisappearPaperInPocket(cardInPocket){
-
+function appearDisappearReciepes(reciepCard, cardInPocket) {
     const classListCard = cardInPocket.classList;
+
 
     if (paperInPocket != null){
 
-        if (classListCard.contains('paperApear')){
+        if (classListCard.contains('paperApear') || classListCard.contains('paperDisapear')){
             classListCard.remove('paperApear')
+            classListCard.remove('paperDisapear')
         }
 
-    
+
+
         getPocketByClassName.querySelector('#' + paperInPocket).lastElementChild.classList.replace('paperDisapear', 'paperApear')
         classListCard.add('paperDisapear');
+
 
         paperInPocket = cardInPocket.parentElement.id
 
@@ -86,9 +94,8 @@ function appearDisappearPaperInPocket(cardInPocket){
 
     };
 
-}
 
-function appearDisappearReciepes(reciepCard) {
+
     let pocketsElementById = Array.from(getPocketByClassName.children);
 
     const lastPocket = pocketsElementById.at(-1);
@@ -102,18 +109,21 @@ function appearDisappearReciepes(reciepCard) {
         setTimeout(() => {
             lastPocket.remove();
         }, 1000);
-
     }
-
-
-
     else{
-
-
         reciepCard.classList.add('appearReciep');
         pocketsModule.append(reciepCard)
     }
 
+
+
+
+    // document.addEventListener('click', function(event){
+
+    //     if(lastPocket && event.target.className != 'pocket flip-container'){
+    //         lastPocket.remove();
+    //     };
+    // })
 
 };
 
@@ -150,17 +160,20 @@ function addBlockOfReciep(pocket){
     flipCardBack.innerHTML = `<img src='img/recepies/${imageFront}' alt="Front Image" />`
 
 
-    appearDisappearReciepes(flipContainer);
 
-    appearDisappearPaperInPocket(miniCardInPocket);
+    appearDisappearReciepes(flipContainer, miniCardInPocket);
+
+
 
 
 
     setTimeout(() => {
         flipContainer.addEventListener('click', function() {
             this.querySelector('.flip-card').classList.toggle('flipped');
+
         });
     }, 1000);
+
 
 
 };
