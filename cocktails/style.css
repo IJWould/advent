@@ -1,32 +1,164 @@
 
 
-.backgroundImages{
+body {
+    background: white;
+    background-repeat: repeat-y;
+    max-width: 1920px;
+    
+}
+.landing{
+    position: relative;
+}
+.backgroundImages {
+    align-items: center;
+    justify-content: center;
     display: flex;
-    margin: 20px;
+    margin: 25px;
+    padding: 25px;
     position: absolute;
     z-index: 1;
     flex-direction: column;
 }
 
-.background{
+
+.text {}
+
+
+.history,
+.picture,
+.front,
+.back{
+    
+}
+.history{
+    
+    font-size: 40px;
+    transform: rotateY(20deg) ;
+    color: rgb(246, 235, 235);
+    background-color: rgba(20, 131, 196, 0.3);
+    border: solid 5px rgba(0, 0, 0, 0.307);
+    width: 15em;
+    transform: rotateY(10deg) rotateX(1deg) ;
+   
+    
+    
+}
+
+.front{
+
+    
+    /* transform: rotateY(30deg) translateZ(200px); */
+}
+
+.background {
 
     padding: 20px;
 }
 
-.cocktails{
+
+
+.back,
+.front{
+    max-height: 560px;
+    border-radius: 80px;
+    transform: rotateY(10deg) rotateX(1deg);
+    z-index: 3;
+    
+    background-color: rgba(20, 131, 196, 0.3);
+    border: solid 50px rgba(75, 63, 92, 0.39);
+}
+
+.back{
+    position: absolute;
+    visibility: hidden;
+    
+}
+.cocktailImg {
+    
+    padding-left: 2.5px;
+    padding-right: 2.5px;
+    
+}
+.picture{
+    max-height: 560px;
+    max-width: 500px;
+    background-color: rgba(20, 131, 196, 0.3);
+    border: solid 50px rgba(75, 63, 92, 0.39);
+    transform: rotateY(10deg) rotateX(1deg);
+    
+    border-radius: 130px;
+}
+
+.prohibitionСocktails {
     z-index: 2;
+
     display: flex;
     flex-direction: column;
     position: absolute;
-    justify-content: space-between;
-    width: max-content;
-
-}
-
-.cocktailFrame{
-    background: black;
-    display: flex;
+    
     justify-content: center;
-
+    align-items: center;
+    align-content: space-around;
+    
+    margin: auto;
+    transform-style: preserve-3d;
+    
+    
 
 }
+
+
+.cocktailFrame {
+
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction:row;
+    perspective: 1000px;
+    margin: 50px;
+    padding: 15px;
+   
+    
+    
+    transform-style: preserve-3d;
+    
+}
+
+
+
+
+/* .manhattan {
+    grid-area: 1 / 1;
+
+}
+
+.daiquiri {
+    grid-area: 2 / 2;
+    
+}
+
+.tomCollins {
+
+    grid-area: 3 / 3;
+}
+
+
+.whiskeySour {
+    grid-area: 4 / 4;
+    
+}
+
+.julep {
+
+    grid-area: 5 / 5;
+    
+
+}
+
+.sidecar {
+    grid-area: 6 / 6;
+
+    
+} */
+
